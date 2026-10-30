@@ -14,6 +14,7 @@ class PrimayButtonWidget extends StatelessWidget {
   final Widget? icon;
   final void Function()? onPress;
   final Widget? tralingIcon;
+  final bool isLoading;
   const PrimayButtonWidget({
     super.key,
     this.buttonText,
@@ -26,6 +27,7 @@ class PrimayButtonWidget extends StatelessWidget {
     this.onPress,
     this.icon,
     this.tralingIcon,
+    this.isLoading = false,
   });
 
   @override
@@ -44,9 +46,17 @@ class PrimayButtonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            icon!=null? icon!:SizedBox.shrink(),
-             icon!=null? const  WidthSpace(6): SizedBox.shrink(),
-            Text(
+            icon != null ? icon! : SizedBox.shrink(),
+            icon != null ? const WidthSpace(6) : SizedBox.shrink(),
+            isLoading ? SizedBox(
+              width: 20.w,
+              height: 20.h,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              )
+            ) : Text(
               buttonText ?? "",
               style: TextStyle(
                 color: textColor ?? Colors.white,
@@ -54,9 +64,8 @@ class PrimayButtonWidget extends StatelessWidget {
                 fontSize: fontSize ?? 16.sp,
               ),
             ),
-             tralingIcon!=null? const  WidthSpace(6): SizedBox.shrink(),
-             tralingIcon !=null? tralingIcon!:SizedBox.shrink(),
-            
+            tralingIcon != null ? const WidthSpace(6) : SizedBox.shrink(),
+            tralingIcon != null ? tralingIcon! : SizedBox.shrink(),
           ],
         ),
       ),
